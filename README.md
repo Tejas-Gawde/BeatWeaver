@@ -1,1 +1,1 @@
-# BeatWeaver---A-Music-Player-made-with-Java
+# BeatWeaver - Music Player made with Java
