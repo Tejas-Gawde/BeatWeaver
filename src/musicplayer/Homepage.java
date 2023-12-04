@@ -17,7 +17,6 @@ import javazoom.jl.decoder.JavaLayerException;
 import javazoom.jl.player.Player;
 import com.mpatric.mp3agic.*;
 import java.awt.Image;
-import java.io.FileOutputStream;
 /**
  *
  * @author tejas
@@ -341,23 +340,17 @@ public class Homepage extends javax.swing.JFrame {
             FileArray = mp3Files;
             totalNumSongs = FileArray.length;
             if (mp3Files != null && mp3Files.length > 0) {
-                System.out.println("MP3 files in selected directory:");
-                System.out.println(mp3Files.length);
                 for (File mp3File : mp3Files) {
                     displaySongName = mp3File.getName().replace(".mp3", "");
-                    System.out.println(mp3File.getName());
                     listModel.addElement(displaySongName);
                     jList1.setModel(listModel);
                 }
-                System.out.println("--------------------");
                 cardLayout.show(cardPanel, "songList");
             } else {
                 JOptionPane.showMessageDialog(null, "No MP3 files found in the selected directory.");
-                System.out.println("No MP3 files found in the selected directory.");
             }
         } else {
             JOptionPane.showMessageDialog(null, "No directory selected.");
-            System.out.println("No directory selected.");
         }
     }//GEN-LAST:event_jFileChooser1ActionPerformed
     
@@ -373,11 +366,7 @@ public class Homepage extends javax.swing.JFrame {
                 songState.setText("Now Selected :");
                 songName.setText(displaySongName);
                 currentSongIndex = i;
-                System.out.println(currentSongIndex);
-                System.out.println(FileFinder.getName());
-               
                 if (player!=null) {
-                    System.out.println("The player is not empty");
                     stop();
                     player = null;
                     myFile = FileFinder;
@@ -392,7 +381,6 @@ public class Homepage extends javax.swing.JFrame {
                     songState.setText("Now Playing :");
                     playPause.setIcon(new javax.swing.ImageIcon(getClass().getResource("/musicplayer/Icon/pause.png")));
                     play();
-                    System.out.println(totalLength);
                 } 
             }
         }
@@ -405,17 +393,14 @@ public class Homepage extends javax.swing.JFrame {
             isPlaying = true;
             isFirstTime = false;
             songState.setText("Now Playing :");
-            System.out.println("Song has started playing");
             playPause.setIcon(new javax.swing.ImageIcon(getClass().getResource("/musicplayer/Icon/pause.png")));
 
         } else if (player!=null && isPlaying==false ) {
-            System.out.println("Song has resumed playing");
             resume();
             songState.setText("Now Playing :");
             isPlaying = true;
             playPause.setIcon(new javax.swing.ImageIcon(getClass().getResource("/musicplayer/Icon/pause.png")));
         } else if (player!=null && isPlaying==true) {
-            System.out.println("Song has been paused");
             songState.setText("Now Selected :");
             pause();
             isPlaying = false;
@@ -452,7 +437,6 @@ public class Homepage extends javax.swing.JFrame {
             myFile = FileArray[currentSongIndex];
         } else {
             currentSongIndex += 1;
-            System.out.println(currentSongIndex);
             myFile = FileArray[currentSongIndex];
         }
         displaySongName = myFile.getName().replace(".mp3", "");
@@ -534,19 +518,15 @@ public class Homepage extends javax.swing.JFrame {
             mp3file = new Mp3File(randofile.getAbsolutePath());
             if (mp3file.hasId3v2Tag() && mp3file.getId3v2Tag().getAlbumImage() != null) {
                 byte[] coverArtData = mp3file.getId3v2Tag().getAlbumImage();
-                File coverArtFile = new File(randofile.getParent(), "cover_" + System.currentTimeMillis() + ".jpg");
-                FileOutputStream fos = new FileOutputStream(coverArtFile);
-                fos.write(coverArtData);
-                fos.close();
                 ImageIcon icon = new ImageIcon(coverArtData);
-                Image scaledImage = icon.getImage().getScaledInstance(songPicture.getWidth(), songPicture.getHeight(), Image.SCALE_SMOOTH);
+                int labelWidth = songPicture.getWidth();
+                int labelHeight = songPicture.getHeight();
+                Image scaledImage = icon.getImage().getScaledInstance(labelWidth, labelHeight, Image.SCALE_SMOOTH);
                 ImageIcon scaledIcon = new ImageIcon(scaledImage);
                 songPicture.setIcon(scaledIcon);
-                coverArtFile = null;
                 coverArtData = null;
-                mp3file = null; 
+                mp3file = null;  
             } else {
-                System.out.println("No cover art found in the MP3 file.");
                 songPicture.setIcon(null);
                 songPicture.setText("No Image");
             }
