@@ -13,7 +13,7 @@ Features of v1.0:-
 
 How to run:-
 
-Method 1: Run the MusicPlayer.jar inside the downloaded package.
+Method 1: Run the MusicPlayer.jar inside the latest release.
 
 Method 2: Compile and Run the included java file inside " \src\musicplayer\MusicPlayer.java "
 
