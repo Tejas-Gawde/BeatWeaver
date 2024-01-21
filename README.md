@@ -1,4 +1,4 @@
-# BeatWeaver - A Music Player made with Java
+# BeatWeaver - A Music Player made in Java
 This is a Music Player made purely in Java Ant using JLayer, Mp3agic and Flatlaf as the main dependencies. The UI was made using Swing UI designer. This is a lightweight application I made for learning Java.
 
 ---------------------------------------------------------------
